@@ -28,10 +28,12 @@ end
   end
 end
 
+print "\n\n\n\n"
+puts '===> Test result <==='
 $result.each_pair do |pkgName, result|
   if result == true
-    puts "#{pkgName}: Working!".lightgreen
+    puts "#{pkgName}: " + 'Working!'.lightgreen
   else
-    puts "#{pkgName}: Failed!".lightred
+    puts "#{pkgName}: " + 'Failed!'.lightred
   end
 end
