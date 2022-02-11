@@ -28,12 +28,13 @@ end
   end
 end
 
-print "\n\n\n\n"
-puts '===> Test result <==='
-$result.each_pair do |pkgName, result|
-  if result == true
-    printf "%-20s: %s\n", pkgName, 'Working!'.lightgreen
-  else
-    printf "%-20s: %s\n", pkgName, 'Failed!'.lightred
+File.open('/tmp/test_result', 'w') do |io|
+  io.puts '===> Test result <==='
+  $result.each_pair do |pkgName, result|
+    if result == true
+      io.printf "%-20s: %s\n", pkgName, 'Working!'.lightgreen
+    else
+      io.printf "%-20s: %s\n", pkgName, 'Failed!'.lightred
+    end
   end
 end
