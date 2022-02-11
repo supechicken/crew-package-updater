@@ -9,7 +9,7 @@ $result = {}
 
   pkgName = File.basename(pkgFile, '.rb')
 
-  system 'curl', '-L', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/packages/#{pkgName.rb}"
+  system 'curl', '-L', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
 
   system "yes | crew install #{pkgName}"
 
