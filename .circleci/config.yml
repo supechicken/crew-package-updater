@@ -12,12 +12,12 @@ jobs:
           command: |
             echo 'chronos ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/chronos
             mv /usr/bin/sudo /usr/bin/sudo.elf
-            
+
             cat \<<'EOF' > /usr/bin/sudo
             #!/bin/sh
             exec /usr/bin/sudo.elf -S "${@}"
             EOF
-            
+
             chmod +x /usr/bin/sudo
       - run:
           name: Install Chromebrew
@@ -27,4 +27,9 @@ jobs:
           command: su -l chronos -c "curl -L https://raw.githubusercontent.com/supechicken/crew-package-updater/main/tools/test_pkg.rb | ruby"
       - run:
           name: Print test results
-          command: cat /tmp/test_result
+          command: |
+            cat /tmp/test_result
+
+            if grep 'Failed' /tmp/test_result; then
+              exit 1
+            fi
