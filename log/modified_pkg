@@ -1,5 +1,6 @@
 packages/bash.rb
 packages/filezilla.rb
 packages/libfilezilla.rb
+packages/mc.rb
 packages/nano.rb
 packages/vim.rb
