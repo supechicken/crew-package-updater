@@ -32,8 +32,8 @@ print "\n\n\n\n"
 puts '===> Test result <==='
 $result.each_pair do |pkgName, result|
   if result == true
-    printf '%-20s: %s', pkgName, 'Working!'.lightgreen
+    printf "%-20s: %s\n", pkgName, 'Working!'.lightgreen
   else
-    printf '%-20s: %s', pkgName, 'Failed!'.lightred
+    printf "%-20s: %s\n", pkgName, 'Failed!'.lightred
   end
 end
