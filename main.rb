@@ -1,7 +1,7 @@
 require 'fileutils'
 require_relative 'lib/wrapper'
 
-def update_recipe(file, ver, url_or_git_tag, **options)
+def update_recipe(file, ver, url_or_git_tag, options = {})
   content = File.read(file)
   content.sub!(/version .*/, "version '#{ver}'")
 
