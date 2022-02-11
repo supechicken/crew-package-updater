@@ -1,14 +1,18 @@
 require 'fileutils'
 require_relative 'lib/wrapper'
 
-def update_recipe(file, ver, url)
-  sha256sum = `curl -LSs "#{url}" | sha256sum`[/[^ ]*/]
-
+def update_recipe(file, ver, url_or_git_tag, **options)
   content = File.read(file)
-      
   content.sub!(/version .*/, "version '#{ver}'")
-  content.sub!(/source_url .*/, "source_url '#{url}'")
-  content.sub!(/source_sha256 .*/, "source_sha256 '#{sha256sum}'")
+
+  if option[:git_tag]
+    content.sub!(/(git_hashtag|git_branch) .*/, "git_hashtag '#{url_or_git_tag}'")
+  else
+    sha256sum = `curl -LSs "#{url_or_git_tag}" | sha256sum`[/[^ ]*/]
+
+    content.sub!(/source_url .*/, "source_url '#{url_or_git_tag}'")
+    content.sub!(/source_sha256 .*/, "source_sha256 '#{sha256sum}'")
+  end
 
   File.write(file, content)
 end
@@ -24,7 +28,7 @@ Dir.glob('packages/*.rb') do |pkg|
   @pkg = Object.const_get(pkgName.capitalize)
 
   pkg_ver = `ruby lib/get_crew_pkg_ver.rb #{pkgName}`
-  latest_ver, source_url, options = @pkg.check_update
+  latest_ver, source_url_or_git_tag, options = @pkg.check_update
 
   abort if $?.exitstatus != 0
 
@@ -40,5 +44,5 @@ Dir.glob('packages/*.rb') do |pkg|
   File.write 'log/modified_pkg', "#{pkg}\n", mode: 'a'
   File.write 'log/update_available.md', "- #{pkgName}: `#{pkg_ver}` => `#{latest_ver}`\n", mode: 'a'
 
-  update_recipe(pkg, latest_ver, source_url, options)
+  update_recipe(pkg, latest_ver, source_url_or_git_tag, options)
 end
