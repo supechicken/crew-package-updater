@@ -85,10 +85,10 @@ class Vim < Package
   end
 
   def self.check_update
-    @_latest_ver = @_latest_tag = `git ls-remote --tags https://github.com/vim/vim`.scan(/refs\/tags\/(v.*)/).flatten.sort_by do |ver|
-      Gem::Version.new(ver[/^v(.*)/, 1])
+    @_latest_ver = `git ls-remote --tags https://github.com/vim/vim`.scan(/refs\/tags\/v(.*)/).flatten.sort_by do |ver|
+      Gem::Version.new(ver)
     end[-1]
 
-    return @_latest_ver, @_latest_tag, git_tag: true
+    return @_latest_ver, "v#{@_latest_ver}", git_tag: true
   end
 end
