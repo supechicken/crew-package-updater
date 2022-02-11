@@ -1,0 +1,31 @@
+name: Update checker
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: head
+
+    - name: Check and upgrade
+      run: |
+        ruby main.rb
+        
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git add 'packages/'
+        git add 'log/'
+        git commit -m "Update checker"
+        git push
+
+    - name: Create new branches and upload results in fork
+      env:
+        GH_TOKEN: ${{secrets.GH_TOKEN}}
+      run: ruby tools/fork_create_branch.rb ${GH_TOKEN}
