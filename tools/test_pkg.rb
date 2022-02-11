@@ -9,12 +9,12 @@ def system(*args)
   Kernel.system(*args, exception: true)
 end
 
-`curl -L #{REPO_URL}/log/modified_pkg`.each_line(chomp: true) do |pkgFile|
+`curl -LsS #{REPO_URL}/log/modified_pkg`.each_line(chomp: true) do |pkgFile|
   begin
     pkgName = File.basename(pkgFile, '.rb')
     puts "Working on #{pkgFile}".lightblue
 
-    system 'curl', '-L', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
+    system 'curl', '-LsS', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
     system "yes | crew install #{pkgName}"
 
     `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
@@ -32,8 +32,8 @@ print "\n\n\n\n"
 puts '===> Test result <==='
 $result.each_pair do |pkgName, result|
   if result == true
-    puts "#{pkgName}: " + 'Working!'.lightgreen
+    printf '%-20s: %s', pkgName, 'Working!'.lightgreen
   else
-    puts "#{pkgName}: " + 'Failed!'.lightred
+    printf '%-20s: %s', pkgName, 'Failed!'.lightred
   end
 end
