@@ -5,7 +5,7 @@ def update_recipe(file, ver, url_or_git_tag, options = {})
   content = File.read(file)
   content.sub!(/version .*/, "version '#{ver}'")
 
-  if option[:git_tag]
+  if options[:git_tag]
     content.sub!(/(git_hashtag|git_branch) .*/, "git_hashtag '#{url_or_git_tag}'")
   else
     sha256sum = `curl -LSs "#{url_or_git_tag}" | sha256sum`[/[^ ]*/]
