@@ -1,31 +1,37 @@
 #!/usr/bin/env ruby
 require 'fileutils'
+require_relative '/usr/local/lib/crew/lib/color.rb'
 
 REPO_URL = 'https://raw.githubusercontent.com/supechicken/crew-package-updater/main'
 $result = {}
 
+def system(*args)
+  Kernel.system(*args, exception: true)
+end
+
 `curl -L #{REPO_URL}/log/modified_pkg`.each_line(chomp: true) do |pkgFile|
-  puts "\e[1;34m""Working on #{pkgFile}""\e[0m"
+  begin
+    pkgName = File.basename(pkgFile, '.rb')
+    puts "Working on #{pkgFile}".lightblue
 
-  pkgName = File.basename(pkgFile, '.rb')
+    system 'curl', '-L', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
+    system "yes | crew install #{pkgName}"
 
-  system 'curl', '-L', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
-
-  system "yes | crew install #{pkgName}"
-
-  `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
-    if system(exec, '--version')
-      $result.merge({ pkgName => true })
-    else
-      $result.merge({ pkgName => false })
+    `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
+      puts "Testing #{exec}".yellow
+      system(exec, '--version')
     end
+    
+    $result.merge!({ pkgName => true })
+  rescue
+    $result.merge!({ pkgName => false })
   end
 end
 
 $result.each_pair do |pkgName, result|
   if result == true
-    puts "\e[1;32m""#{pkgName}: Working!""\e[0m".lightgreen
+    puts "#{pkgName}: Working!".lightgreen
   else
-    puts "\e[1;31m""#{pkgName}: Failed!""\e[0m".lightred
+    puts "#{pkgName}: Failed!".lightred
   end
 end
