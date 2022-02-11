@@ -25,3 +25,6 @@ jobs:
       - run:
           name: Test packages
           command: curl -L https://raw.githubusercontent.com/supechicken/crew-package-updater/main/tools/test_pkg.rb | ruby
+      - run:
+          name: Print test results
+          command: cat /tmp/test_result
