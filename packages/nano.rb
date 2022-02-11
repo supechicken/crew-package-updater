@@ -71,11 +71,11 @@ class Nano < Package
     @_html_url = 'https://nano-editor.org/dist'
     @_html = `curl -LSs '#{@_html_url}'`
     
-    @_major_ver = @_html.scan(/href="(v.*?)\/"/).flatten.sort_by do |ver|
-      Gem::Version.new(ver[/^v(.*)/, 1])
+    @_major_ver = @_html.scan(/href="v(.*?)\/"/).flatten.sort_by do |ver|
+      Gem::Version.new(ver)
     end[-1]
 
-    @_major_ver_html_url = "#{@_html_url}/#{@_major_ver}"
+    @_major_ver_html_url = "#{@_html_url}/v#{@_major_ver}"
     @_major_ver_html = `curl -LSs '#{@_major_ver_html_url}'`
 
     @_latest_ver = @_html.scan(/nano-(.*?).tar.xz/).flatten.sort_by do |ver|
