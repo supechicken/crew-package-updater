@@ -14,6 +14,9 @@ end
     pkgName = File.basename(pkgFile, '.rb')
     puts "Working on #{pkgFile}".lightblue
 
+    # remove target package before installing the newer version one
+    system "crew remove #{pkgName}"
+
     system 'curl', '-LsS', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
     system "yes | crew install #{pkgName}"
 
