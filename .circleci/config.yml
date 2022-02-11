@@ -21,10 +21,10 @@ jobs:
             chmod +x /usr/bin/sudo
       - run:
           name: Install Chromebrew
-          command: su -l chronos -c bash -c 'curl -Ls git.io/vddgY | bash'
+          command: su -l chronos -c 'curl -Ls git.io/vddgY | bash'
       - run:
           name: Test packages
-          command: curl -L https://raw.githubusercontent.com/supechicken/crew-package-updater/main/tools/test_pkg.rb | ruby
+          command: su -l chronos -c "curl -L https://raw.githubusercontent.com/supechicken/crew-package-updater/main/tools/test_pkg.rb | ruby"
       - run:
           name: Print test results
           command: cat /tmp/test_result
