@@ -46,3 +46,4 @@ Dir.glob('packages/*.rb') do |pkg|
 
   update_recipe(pkg, latest_ver, source_url_or_git_tag, options)
 end
+
