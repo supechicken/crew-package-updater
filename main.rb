@@ -24,7 +24,7 @@ Dir.glob('packages/*.rb') do |pkg|
   @pkg = Object.const_get(pkgName.capitalize)
 
   pkg_ver = `ruby lib/get_crew_pkg_ver.rb #{pkgName}`
-  latest_ver, source_url = @pkg.check_update
+  latest_ver, source_url, options = @pkg.check_update
 
   abort if $?.exitstatus != 0
 
@@ -40,5 +40,5 @@ Dir.glob('packages/*.rb') do |pkg|
   File.write 'log/modified_pkg', "#{pkg}\n", mode: 'a'
   File.write 'log/update_available.md', "- #{pkgName}: `#{pkg_ver}` => `#{latest_ver}`\n", mode: 'a'
 
-  update_recipe(pkg, latest_ver, source_url)
+  update_recipe(pkg, latest_ver, source_url, options)
 end
