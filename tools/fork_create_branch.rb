@@ -6,7 +6,7 @@ File.foreach('log/modified_pkg', chomp: true) do |pkgFile|
   pkgName = File.basename(pkgFile, '.rb')
   new_branch_name = "update_#{pkgName}_#{`date '+%Y%m%d'`.chomp}"
 
-  if system "git ls-remote --heads https://supechicken:#{GH_TOKEN}@github.com/supechicken/chromebrew | grep -vq 'update_#{pkgName}_.*'"
+  unless system "git ls-remote --heads https://supechicken:#{GH_TOKEN}@github.com/supechicken/chromebrew | grep -q 'update_#{pkgName}_'"
     Dir.mkdir '/tmp/crew_repo'
 
     Dir.chdir '/tmp/crew_repo' do
