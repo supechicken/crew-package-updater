@@ -78,7 +78,7 @@ class Nano < Package
     @_major_ver_html_url = "#{@_html_url}/v#{@_major_ver}"
     @_major_ver_html = `curl -LSs '#{@_major_ver_html_url}'`
 
-    @_latest_ver = @_html.scan(/nano-(.*?).tar.xz/).flatten.sort_by do |ver|
+    @_latest_ver = @_major_ver_html.scan(/nano-(.*?).tar.xz/).flatten.sort_by do |ver|
       Gem::Version.new(ver)
     end[-1]
 
