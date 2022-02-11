@@ -3,11 +3,11 @@ require 'package'
 class Nano < Package
   description 'Nano\'s ANOther editor, an enhanced free Pico clone.'
   homepage 'https://www.nano-editor.org/'
-  version '5.8'
+  version '6.1'
   license 'GPL-3'
   compatibility 'all'
-  source_url 'https://nano-editor.org/dist/v5/nano-5.8.tar.xz'
-  source_sha256 'e43b63db2f78336e2aa123e8d015dbabc1720a15361714bfd4b1bb4e5e87768c'
+  source_url 'https://nano-editor.org/dist/v6/nano-6.1.tar.xz'
+  source_sha256 '3d57ec893fbfded12665b7f0d563d74431fc43abeaccacedea23b66af704db40'
 
   depends_on 'xdg_base'
 
