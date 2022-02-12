@@ -23,16 +23,10 @@ system 'yes | crew install buildessential'
     system "yes | crew install #{pkgName}"
 
     `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
-      puts "Testing #{exec}".yellow
-
-      begin
-        Timeout::timeout(5) do
-          system(exec, '--version')
-        end
-      rescue Timeout::Error
-      end
+      puts "Checking #{exec}...".yellow
+      raise StandardError if `LD_TRACE_LOADED_OBJECTS=1 #{exec} | tee /dev/tty` =~ /not found/
     end
-    
+
     $result.merge!({ pkgName => true })
   rescue
     $result.merge!({ pkgName => false })
