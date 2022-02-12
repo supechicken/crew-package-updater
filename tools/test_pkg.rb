@@ -21,9 +21,9 @@ system 'yes | crew install buildessential'
     system 'curl', '-LsS', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
     system "yes | crew build #{pkgName}", exception: true
 
-    $result.merge!({ pkgName => true })
-  rescue
-    $result.merge!({ pkgName => false })
+    next $result.merge!({ pkgName => true })
+  rescue RuntimeError
+    next $result.merge!({ pkgName => false })
   end
 end
 
