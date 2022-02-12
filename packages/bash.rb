@@ -63,4 +63,8 @@ class Bash < Package
     
     return @_latest_ver, "#{@_html_url}/#{@_pkg}-#{@_latest_ver}#{@_suffix}"
   end
+
+  def self.test_update
+    return Kernel.system "#{CREW_PREFIX}/bash", '--version'
+  end
 end
