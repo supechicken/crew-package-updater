@@ -12,6 +12,10 @@ class Skype < Package
   depends_on 'gtk3'
   depends_on 'sommelier'
 
+  def self.check
+    system './usr/bin/skypeforlinux', '--version'
+  end
+
   def self.install
     FileUtils.mkdir_p CREW_DEST_PREFIX
     FileUtils.ln_s "./skypeforlinux", 'usr/bin/skype'
