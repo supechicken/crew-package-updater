@@ -9,7 +9,7 @@ def system(*args)
   Kernel.system(*args, exception: true)
 end
 
-system 'crew install buildessential'
+system 'yes | crew install buildessential'
 
 `curl -LsS #{REPO_URL}/log/modified_pkg`.each_line(chomp: true) do |pkgFile|
   begin
