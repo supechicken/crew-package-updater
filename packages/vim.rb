@@ -56,6 +56,10 @@ class Vim < Package
     system 'make'
   end
 
+  def self.check
+    system 'make check'
+  end
+
   def self.install
     system 'make', "DESTDIR=#{CREW_DEST_DIR}", "VIMRCLOC=#{CREW_PREFIX}/etc", 'install'
     FileUtils.ln_s "#{CREW_PREFIX}/bin/vim", "#{CREW_DEST_PREFIX}/bin/vi"
