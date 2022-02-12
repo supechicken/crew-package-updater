@@ -17,6 +17,10 @@ class Opera < Package
   depends_on 'libcom_err'
   depends_on 'sommelier'
 
+  def self.check
+    system './lib/x86_64-linux-gnu/opera/opera', '--version'
+  end
+
   def self.install
     # llvm-strip doesn't works with opera
     ENV['CREW_NOT_STRIP'] = '1'
