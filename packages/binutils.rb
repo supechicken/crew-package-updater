@@ -47,7 +47,7 @@ class Binutils < Package
   end
 
   def self.check
-    system 'cd build; make check || true'
+    system 'cd build; make check'
   end
 
   def self.install
