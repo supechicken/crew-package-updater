@@ -14,6 +14,10 @@ class Brave < Package
   depends_on 'xdg_base'
   depends_on 'sommelier'
 
+  def self.check
+    system './brave', '--version'
+  end
+
   def self.install
     FileUtils.mkdir_p "#{CREW_DEST_PREFIX}/bin"
     FileUtils.mkdir_p "#{CREW_DEST_PREFIX}/share/brave"
