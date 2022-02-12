@@ -34,6 +34,10 @@ class Bash < Package
     system 'make'
   end
 
+  def self.check
+    system 'make check'
+  end
+
   def self.install
     system 'make', "DESTDIR=#{CREW_DEST_DIR}", 'install'
     FileUtils.ln_s "#{CREW_PREFIX}/bin/bash", "#{CREW_DEST_PREFIX}/bin/sh"
@@ -62,9 +66,5 @@ class Bash < Package
     end[-1]
     
     return @_latest_ver, "#{@_html_url}/#{@_pkg}-#{@_latest_ver}#{@_suffix}"
-  end
-
-  def self.test_update
-    return Kernel.system "#{CREW_PREFIX}/bash", '--version'
   end
 end
