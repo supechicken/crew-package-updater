@@ -54,6 +54,10 @@ class Nano < Package
     end
   end
 
+  def self.check
+    system 'make check'
+  end
+
   def self.install
     system 'make', "DESTDIR=#{CREW_DEST_DIR}", 'install-strip'
     system "install -Dm644 nanorc #{CREW_DEST_HOME}/.nanorc"
