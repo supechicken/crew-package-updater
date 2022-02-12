@@ -5,9 +5,8 @@ require_relative '/usr/local/lib/crew/lib/color.rb'
 REPO_URL = 'https://raw.githubusercontent.com/supechicken/crew-package-updater/main'
 $result = {}
 
-def system(*args)
-  Kernel.system(*args, exception: true)
-end
+FileUtils.mkdir_p '/tmp/build'
+Dir.chdir '/tmp/build'
 
 system 'yes | crew install buildessential'
 
@@ -20,12 +19,7 @@ system 'yes | crew install buildessential'
     system "crew remove #{pkgName}"
 
     system 'curl', '-LsS', "#{REPO_URL}/#{pkgFile}", '-o', "/usr/local/lib/crew/#{pkgFile}"
-    system "yes | crew install #{pkgName}"
-
-    `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
-      puts "Checking #{exec}...".yellow
-      raise StandardError if `LD_TRACE_LOADED_OBJECTS=1 #{exec} | tee /dev/tty` =~ /not found/
-    end
+    system "yes | crew build #{pkgName}", exception: true
 
     $result.merge!({ pkgName => true })
   rescue
