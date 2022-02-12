@@ -24,7 +24,13 @@ system 'yes | crew install buildessential'
 
     `crew files #{pkgName} | grep "^/usr/local/bin/.*"`.each_line(chomp: true) do |exec|
       puts "Testing #{exec}".yellow
-      system(exec, '--version')
+
+      begin
+        Timeout::timeout(5) do
+          system(exec, '--version')
+        end
+      rescue Timeout::Error
+      end
     end
     
     $result.merge!({ pkgName => true })
