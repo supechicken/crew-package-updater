@@ -33,3 +33,5 @@ jobs:
             if grep 'Failed' /tmp/test_result; then
               exit 1
             fi
+      - store_artifacts:
+          path: /tmp/build
