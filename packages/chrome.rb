@@ -16,6 +16,10 @@ class Chrome < Package
   depends_on 'cras'
   depends_on 'sommelier'
 
+  def self.check
+    system './opt/google/chrome/chrome', '--version'
+  end
+
   def self.install
     FileUtils.mkdir_p "#{CREW_DEST_PREFIX}/bin"
 
