@@ -32,6 +32,10 @@ class Filezilla < Package
     system 'make'
   end
 
+  def self.check
+    system 'make check'
+  end
+
   def self.install
     system 'make', "DESTDIR=#{CREW_DEST_DIR}", 'install'
   end
