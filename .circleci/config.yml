@@ -3,7 +3,7 @@
 version: 2.1
 
 jobs:
-  build:
+  x86_64:
     docker:
       - image: supechicken/cros-image-eve:14268.67.0
     steps:
@@ -35,3 +35,5 @@ jobs:
             fi
       - store_artifacts:
           path: /tmp/build
+  armv7l:
+  i686:
