@@ -1,3 +1,4 @@
+packages/brave.rb
 packages/filezilla.rb
 packages/libfilezilla.rb
 packages/vim.rb
