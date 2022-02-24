@@ -3,11 +3,11 @@ require 'package'
 class Vim < Package
   description 'Vim is a highly configurable text editor built to make creating and changing any kind of text very efficient.'
   homepage 'http://www.vim.org/'
-  version '8.2.4460'
+  version '8.2.4464'
   license 'GPL-2'
   compatibility 'all'
   source_url 'https://github.com/vim/vim.git'
-  git_hashtag 'v8.2.4460'
+  git_hashtag 'v8.2.4464'
 
   depends_on 'vim_runtime'
 

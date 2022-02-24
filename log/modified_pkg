@@ -1,4 +1,5 @@
 packages/filezilla.rb
 packages/libfilezilla.rb
 packages/nano.rb
+packages/skype.rb
 packages/vim.rb
