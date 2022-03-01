@@ -1,3 +1,4 @@
+packages/chrome.rb
 packages/filezilla.rb
 packages/libfilezilla.rb
 packages/nano.rb
