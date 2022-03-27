@@ -3,11 +3,11 @@ require 'package'
 class Mc < Package
   description 'GNU Midnight Commander is a visual file manager'
   homepage 'http://midnight-commander.org/'
-  version '4.8.27'
+  version '4.8.28'
   license 'GPL-2'
   compatibility 'all'
   source_url 'https://github.com/MidnightCommander/mc.git'
-  git_hashtag '4.8.27'
+  git_hashtag '4.8.28'
 
   depends_on 'glib' => :build
   depends_on 'aspell' => :build
