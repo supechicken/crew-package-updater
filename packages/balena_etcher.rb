@@ -14,8 +14,8 @@ class Balena_etcher < Package
   })
 
   source_sha256 ({
-    x86_64: 'b2432729ad79e6aa1d6292465db065b078b627c5ec6ddedea8580434088cb74f',
-      i686: 'c9a2c976f0edff0521c71b9e4e948dc6f133749cd7e60ffc3796a6743d17e841'
+    x86_64: '1341852897149ff2d738dcb9f68f141dcff4bce9c6b9d33add453c2d0706f1d9',
+      i686: '5f3614fa1f80f2729a5c447148b12dfc1292cc812071c8c3af45d8cb24b8c52e'
   })
 
   no_compile_needed
@@ -45,7 +45,7 @@ class Balena_etcher < Package
     @_wrapper = <<~EOF
       #!/usr/bin/env bash
       # sudo wrapper for balena_etcher
-      exec sudo -E LD_LIBRARY_PATH=${LD_LIBRARY_PATH} balena-etcher-electron
+      exec sudo -E LD_LIBRARY_PATH="${LD_LIBRARY_PATH}" balena-etcher-electron
     EOF
   end
 
