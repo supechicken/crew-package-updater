@@ -4,16 +4,16 @@ class Balena_etcher < Package
   description 'Flash OS images to SD cards & USB drives, safely and easily.'
   homepage 'https://www.balena.io/etcher/'
   @_ver = '1.7.8'
-  version @_ver
+  version '1.7.8'
   license 'Apache-2.0'
   compatibility 'x86_64, i686'
 
-  source_url ({
+  source_url 'https://github.com/balena-io/etcher/releases/download/v1.7.8/balenaEtcher-1.7.8-x64.AppImage'
     x86_64: "https://github.com/balena-io/etcher/releases/download/v#{@_ver}/balenaEtcher-#{@_ver}-x64.AppImage",
       i686: "https://github.com/balena-io/etcher/releases/download/v#{@_ver}/balenaEtcher-#{@_ver}-ia32.AppImage"
   })
 
-  source_sha256 ({
+  source_sha256 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
     x86_64: '1341852897149ff2d738dcb9f68f141dcff4bce9c6b9d33add453c2d0706f1d9',
       i686: '5f3614fa1f80f2729a5c447148b12dfc1292cc812071c8c3af45d8cb24b8c52e'
   })

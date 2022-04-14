@@ -1,4 +1,6 @@
+packages/balena_etcher.rb
 packages/brave.rb
+packages/chrome.rb
 packages/filezilla.rb
 packages/libfilezilla.rb
 packages/mc.rb

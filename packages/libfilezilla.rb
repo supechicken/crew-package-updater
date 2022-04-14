@@ -3,11 +3,11 @@ require 'package'
 class Libfilezilla < Package
   description 'libfilezilla is a small and modern C++ library, offering some basic functionality to build high-performing, platform-independent programs.'
   homepage 'https://lib.filezilla-project.org/'
-  version '0.36.0'
+  version '0.37.1'
   license 'GPL-2+'
   compatibility 'aarch64,armv7l,x86_64'
-  source_url 'https://download.filezilla-project.org/libfilezilla/libfilezilla-0.36.0.tar.bz2'
-  source_sha256 'c0271c18ede7fbbc826b21c972c2cb0ff96744ee5a15c91d8d74e9bc3853a872'
+  source_url 'https://download.filezilla-project.org/libfilezilla/libfilezilla-0.37.1.tar.bz2'
+  source_sha256 'f9446c0936ecc6f6172f8b944536f0708d54c27bfd1fa0e62e1410c6f7cb33e8'
 
   depends_on 'p11kit'
 
