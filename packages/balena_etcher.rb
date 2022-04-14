@@ -62,4 +62,9 @@ class Balena_etcher < Package
     puts "To get started, type 'balena-etcher'.".lightblue
     puts
   end
+
+  def self.check_update
+    @_latest_ver = `curl -IsS https://github.com/balena-io/etcher/releases/latest`[/^location.*tag\/v(.*?)$/, 1]
+    return @_latest_ver, "https://github.com/balena-io/etcher/releases/download/v#{@_latest_ver}/balenaEtcher-#{@_latest_ver}-x64.AppImage"
+  end
 end
